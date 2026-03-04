@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UCEED & CEED Coaching | My Design Academia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#fff;--bg2:#f7f7f7;--bg3:#eee;--border:rgba(0,0,0,.08);--text:#000;--muted:rgba(0,0,0,.55);--mid:rgba(0,0,0,.75);--accent:#d4ff00;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;font-weight:300;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    .label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+    .r{max-width:1200px;margin:0 auto;padding:0 3rem;}
+
+    /* NAV */
+    .page-nav{background:#000;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.08);}
+    .page-nav .r{display:flex;align-items:center;}
+    .pnav-label{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);padding:0 1.2rem 0 0;border-right:1px solid rgba(255,255,255,.08);white-space:nowrap;}
+    .pnav-link{font-size:.7rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:1rem 1.6rem;color:rgba(255,255,255,.4);border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;display:inline-block;}
+    .pnav-link:hover{color:#fff;}
+    .pnav-link.uceed-nav:hover,.pnav-link.uceed-nav.active{color:#fff;border-bottom-color:var(--accent);}
+    .pnav-link.ceed-nav:hover,.pnav-link.ceed-nav.active{color:#fff;border-bottom-color:#fff;}
+    .pnav-sep{width:1px;height:18px;background:rgba(255,255,255,.1);display:inline-block;vertical-align:middle;}
+
+    /* EXAM DIVIDER */
+    .exam-divider{background:#000;color:#fff;padding:2.5rem 0;border-top:3px solid var(--accent);}
+    .exam-divider.ceed-div{border-top-color:#fff;}
+    .exam-divider .r{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .ediv-left{display:flex;align-items:baseline;gap:1.5rem;flex-wrap:wrap;}
+    .ediv-tag{font-size:.6rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:.28rem .75rem;flex-shrink:0;align-self:center;}
+    .ceed-div .ediv-tag{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.3);}
+    .ediv-title{font-family:"Bebas Neue",sans-serif;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:.03em;line-height:1;}
+    .ediv-title span{color:var(--accent);}
+    .ceed-div .ediv-title span{color:rgba(255,255,255,.5);}
+    .ediv-desc{font-size:.82rem;color:rgba(255,255,255,.5);line-height:1.7;margin-top:.4rem;}
+    .ediv-stats{display:flex;gap:1px;background:rgba(255,255,255,.08);flex-shrink:0;}
+    .ediv-stat{background:#111;padding:.9rem 1.3rem;text-align:center;}
+    .ediv-stat-n{font-family:"Bebas Neue",sans-serif;font-size:1.5rem;color:var(--accent);line-height:1;}
+    .ceed-div .ediv-stat-n{color:#fff;}
+    .ediv-stat-l{font-size:.58rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.2rem;}
+
+    /* INFO STRIP */
+    .info-strip{border-bottom:1px solid var(--border);}
+    .info-strip .r{display:grid;grid-template-columns:1fr 1fr;}
+    .info-col{padding:2.5rem 3rem;}
+    .info-col:first-child{border-right:1px solid var(--border);}
+    .info-col .label{display:block;margin-bottom:.5rem;}
+    .info-col h2{font-family:"Bebas Neue",sans-serif;font-size:1.6rem;letter-spacing:.04em;margin-bottom:.85rem;}
+    .info-col p{font-size:.83rem;color:var(--muted);line-height:1.8;margin-bottom:.7rem;}
+    .tag-row{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem;}
+    .tag{font-size:.6rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;border:1px solid rgba(0,0,0,.2);padding:.22rem .6rem;color:var(--mid);}
+
+    /* READ MORE */
+    .collapse-body{max-height:0;overflow:hidden;transition:max-height .4s ease;}
+    .collapse-body.open{max-height:400px;}
+    .read-more-btn{display:inline-flex;align-items:center;gap:.4rem;font-size:.68rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);cursor:pointer;margin-top:.85rem;background:none;border:none;padding:0;transition:color .2s;}
+    .read-more-btn:hover{color:#000;}
+    .read-more-btn .arrow{transition:transform .3s;display:inline-block;}
+    .read-more-btn.open .arrow{transform:rotate(180deg);}
+
+    /* APPROACH */
+    .approach{padding:2.5rem 0;background:var(--bg2);border-bottom:1px solid var(--border);}
+    .approach .r{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;align-items:start;}
+    .approach-aside .label{display:block;margin-bottom:.4rem;}
+    .approach-aside h3{font-family:"Bebas Neue",sans-serif;font-size:1.6rem;letter-spacing:.04em;margin-bottom:.5rem;}
+    .approach-aside p{font-size:.8rem;color:var(--muted);line-height:1.75;}
+    .approach-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .acard{background:var(--bg);padding:1.3rem;}
+    .acard.dark{background:#000;color:#fff;}
+    .acard.dark .adesc{color:rgba(255,255,255,.6);}
+    .aicon{font-size:1.3rem;margin-bottom:.4rem;}
+    .atitle{font-weight:600;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.35rem;}
+    .adesc{font-size:.78rem;color:var(--muted);line-height:1.65;}
+
+    /* TABS */
+    .tabbed{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+    .tab-nav{display:flex;border-bottom:2px solid var(--border);margin-bottom:2rem;overflow-x:auto;}
+    .tab-btn{font-size:.66rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:.8rem 1.3rem;cursor:pointer;background:none;border:none;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap;}
+    .tab-btn.active{color:#000;border-bottom-color:#000;}
+    .tab-btn:hover{color:#000;}
+    .tab-pane{display:none;}
+    .tab-pane.active{display:block;}
+
+    /* ELIGIBILITY */
+    .elig-layout{display:grid;grid-template-columns:240px 1fr;gap:2.5rem;align-items:start;}
+    .elig-layout h2{font-family:"Bebas Neue",sans-serif;font-size:1.7rem;letter-spacing:.04em;margin:.3rem 0 .7rem;}
+    .elig-layout p{font-size:.82rem;color:var(--muted);line-height:1.75;}
+    .elig-table{width:100%;border-collapse:collapse;font-size:.82rem;}
+    .elig-table thead th{background:#000;color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.75rem 1rem;text-align:left;}
+    .elig-table tbody tr{border-bottom:1px solid var(--border);}
+    .elig-table tbody td{padding:.9rem 1rem;color:var(--mid);line-height:1.65;vertical-align:top;}
+    .elig-table tbody td:first-child{font-weight:600;font-size:.7rem;letter-spacing:.07em;text-transform:uppercase;color:#000;white-space:nowrap;background:var(--bg2);border-right:1px solid var(--border);width:160px;}
+
+    /* EXAM STRUCTURE */
+    .exam-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:1.4rem;}
+    .ecard{border:1px solid var(--border);}
+    .ecard-head{background:#000;color:#fff;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;}
+    .ecard-title{font-family:"Bebas Neue",sans-serif;font-size:1.1rem;letter-spacing:.07em;}
+    .ecard-badge{font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:.18rem .5rem;}
+    .struct-table{width:100%;border-collapse:collapse;font-size:.8rem;}
+    .struct-table tr{border-bottom:1px solid var(--border);}
+    .struct-table tr:last-child{border-bottom:none;}
+    .struct-table td{padding:.7rem 1rem;color:var(--mid);vertical-align:top;}
+    .struct-table td:first-child{font-weight:600;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);width:42%;background:var(--bg2);border-right:1px solid var(--border);}
+    .qtable-label{font-size:.63rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:.55rem;}
+    .qwrap{overflow-x:auto;}
+    .qtable{width:100%;border-collapse:collapse;font-size:.78rem;}
+    .qtable thead th{background:#000;color:#fff;font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.6rem .85rem;text-align:center;white-space:nowrap;}
+    .qtable thead th:first-child,.qtable thead th:nth-child(2){text-align:left;}
+    .qtable tbody tr{border-bottom:1px solid var(--border);}
+    .qtable tbody tr:last-child{background:var(--bg2);font-weight:600;}
+    .qtable tbody td{padding:.65rem .85rem;color:var(--mid);text-align:center;}
+    .qtable tbody td:first-child,.qtable tbody td:nth-child(2){text-align:left;}
+    .neg{color:#c0392b;}
+
+    /* SYLLABUS */
+    .syl-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+    .syl-block{border:1px solid var(--border);}
+    .syl-head{background:#000;color:#fff;padding:.85rem 1.1rem;display:flex;align-items:center;justify-content:space-between;}
+    .syl-title{font-family:"Bebas Neue",sans-serif;font-size:1.05rem;letter-spacing:.07em;}
+    .syl-sub{font-size:.6rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);}
+    .syl-row{display:grid;grid-template-columns:128px 1fr;border-bottom:1px solid var(--border);}
+    .syl-row:last-child{border-bottom:none;}
+    .syl-area{padding:.75rem .9rem;font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:#000;background:var(--bg2);border-right:1px solid var(--border);display:flex;align-items:center;}
+    .syl-desc{padding:.75rem .9rem;font-size:.77rem;color:var(--muted);line-height:1.6;display:flex;align-items:center;}
+
+    /* CAMPUSES */
+    .campus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);}
+    .campus-bot{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-top:none;}
+    .ccard{background:var(--bg);padding:1.3rem;}
+    .cnum{font-family:"Bebas Neue",sans-serif;font-size:2rem;color:var(--bg3);line-height:1;margin-bottom:.25rem;}
+    .cname{font-weight:700;font-size:.8rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.25rem;}
+    .cdis{font-size:.74rem;color:var(--muted);margin-bottom:.45rem;}
+    .cseats{display:inline-block;background:#000;color:var(--accent);font-size:.6rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.18rem .55rem;margin-bottom:.5rem;}
+    .cfeat{font-size:.76rem;color:var(--muted);line-height:1.6;}
+
+    /* SEAT MATRIX */
+    .seat-table{width:100%;border-collapse:collapse;font-size:.81rem;}
+    .seat-table thead th{background:#000;color:#fff;font-size:.63rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.75rem 1rem;text-align:left;}
+    .seat-table tbody tr{border-bottom:1px solid var(--border);}
+    .seat-table tbody td{padding:.75rem 1rem;color:var(--mid);vertical-align:middle;}
+    .seat-table tbody td:first-child{font-weight:700;color:#000;background:var(--bg2);border-right:1px solid var(--border);white-space:nowrap;font-size:.76rem;}
+    .seat-table tbody td:last-child{text-align:center;font-weight:600;}
+    .seat-group td:first-child{border-top:2px solid var(--border);}
+
+    /* FEE TABLE */
+    .fee-table{width:100%;border-collapse:collapse;font-size:.8rem;}
+    .fee-table thead th{background:#000;color:#fff;font-size:.61rem;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:.75rem .9rem;text-align:left;white-space:nowrap;}
+    .fee-table tbody tr{border-bottom:1px solid var(--border);}
+    .fee-table tbody td{padding:.85rem .9rem;color:var(--mid);}
+    .fee-table tbody td:first-child{font-weight:700;color:#000;}
+    .fee-total{font-weight:700;color:#000!important;background:var(--bg2);}
+
+    /* CTA */
+    .cta-band{background:#000;color:#fff;padding:3rem 0;}
+    .cta-band .r{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .cta-band h2{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:.04em;margin-bottom:.5rem;}
+    .cta-band h2 span{color:var(--accent);}
+    .cta-band p{font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.75;max-width:400px;}
+    .cta-btns{display:flex;flex-direction:column;gap:.55rem;flex-shrink:0;}
+    .btn-accent{display:inline-block;background:var(--accent);color:#000;font-family:"Inter",sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;padding:.82rem 1.7rem;transition:all .2s;}
+    .btn-accent:hover{background:#c8f000;}
+    .btn-outline-w{display:inline-block;border:1px solid rgba(255,255,255,.25);color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;padding:.82rem 1.7rem;transition:all .2s;}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08);}
+
+    /* RESPONSIVE */
+    @media(max-width:960px){
+      .r{padding:0 1.5rem;}
+      .info-strip .r{grid-template-columns:1fr;}
+      .info-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+      .approach .r{grid-template-columns:1fr;}
+      .elig-layout,.exam-cols,.syl-grid{grid-template-columns:1fr;}
+      .campus-grid{grid-template-columns:1fr 1fr;}
+      .campus-bot{grid-template-columns:1fr;}
+      .cta-band .r{flex-direction:column;align-items:flex-start;}
+      .cta-btns{flex-direction:row;flex-wrap:wrap;}
+      .ediv-stats{display:none;}
+      .pnav-label{display:none;}
+    }
+    @media(max-width:600px){
+      .approach-grid,.campus-grid{grid-template-columns:1fr;}
+      .ediv-left{flex-direction:column;gap:.5rem;align-items:flex-start;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- STICKY NAV -->
+<nav class="page-nav">
+  <div class="r">
+    <span class="pnav-label">Jump to</span>
+    <a class="pnav-link uceed-nav" href="#uceed">UCEED &mdash; B.Des</a>
+    <span class="pnav-sep"></span>
+    <a class="pnav-link ceed-nav" href="#ceed">CEED &mdash; M.Des</a>
+  </div>
+</nav>
+
+
+<!-- ═══════════ UCEED ═══════════ -->
+<div id="uceed">
+
+  <div class="exam-divider">
+    <div class="r">
+      <div class="ediv-left">
+        <div class="ediv-tag">Undergraduate</div>
+        <div>
+          <div class="ediv-title"><span>UCEED</span> &mdash; B.Des</div>
+          <div class="ediv-desc">Undergraduate Common Entrance Examination for Design.<br>Gateway to B.Des at top IITs, conducted by IIT Bombay.</div>
+        </div>
+      </div>
+      <div class="ediv-stats">
+        <div class="ediv-stat"><div class="ediv-stat-n">5+</div><div class="ediv-stat-l">IIT Campuses</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">300</div><div class="ediv-stat-l">Total Marks</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">2</div><div class="ediv-stat-l">Exam Parts</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">IIT<br>Bombay</div><div class="ediv-stat-l">Conducted By</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-strip">
+    <div class="r">
+      <div class="info-col">
+        <span class="label">The Exam</span>
+        <h2>What is UCEED?</h2>
+        <p>UCEED is a national-level exam conducted by <strong>IIT Bombay</strong> &mdash; the gateway to B.Des programs at IITs and IIITDM Jabalpur. It evaluates aptitude, visualization, creativity, and design thinking.</p>
+        <p>A B.Des from an IIT opens careers in product design, UX/UI, graphic design, animation, and industrial design.</p>
+        <div class="collapse-body" id="u-whatMore">
+          <p style="margin-top:.7rem;">Our institute focuses on IIT design entrance coaching with strong creative training, personal attention, and structured exam preparation &mdash; for students in 11th, 12th, or their drop year.</p>
+        </div>
+        <button class="read-more-btn" onclick="toggle('u-whatMore',this)">Read More <span class="arrow">&#9660;</span></button>
+        <div class="tag-row">
+          <span class="tag">IIT Bombay</span><span class="tag">IIT Delhi</span><span class="tag">IIT Guwahati</span>
+          <span class="tag">IIT Hyderabad</span><span class="tag">IIT Roorkee</span><span class="tag">IIITDM Jabalpur</span>
+        </div>
+      </div>
+      <div class="info-col">
+        <span class="label">Why Choose Us</span>
+        <h2>Our Coaching Approach</h2>
+        <p>We believe UCEED tests creativity, observation, and real design thinking &mdash; not just studies. Small batches, personal feedback, and mock tests ensure every student gets the attention they need.</p>
+        <p>Whether you are in 11th, 12th or drop year &mdash; we help you build confidence and the skills required to crack UCEED.</p>
+        <div class="collapse-body" id="u-whyMore">
+          <p style="margin-top:.7rem;">Our institute focuses on IIT design entrance coaching in Pune with strong creative training, personal attention, and structured exam preparation for all kinds of students.</p>
+        </div>
+        <button class="read-more-btn" onclick="toggle('u-whyMore',this)">Read More <span class="arrow">&#9660;</span></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="approach">
+    <div class="r">
+      <div class="approach-aside">
+        <span class="label">How We Train</span>
+        <h3>Preparation Approach</h3>
+        <p>Five focused pillars built around how UCEED actually tests you.</p>
+      </div>
+      <div class="approach-grid">
+        <div class="acard"><div class="aicon">&#9999;&#65039;</div><div class="atitle">Sketching &amp; Visualization</div><div class="adesc">Perspective, proportions, shading, and composition for Part B.</div></div>
+        <div class="acard"><div class="aicon">&#128161;</div><div class="atitle">Creative &amp; Analytical Thinking</div><div class="adesc">Logical reasoning, observation, and problem-solving for Part A.</div></div>
+        <div class="acard"><div class="aicon">&#129504;</div><div class="atitle">Design Thinking</div><div class="adesc">Solving problems with creativity, empathy, and practical ideas.</div></div>
+        <div class="acard"><div class="aicon">&#128221;</div><div class="atitle">Mock Tests &amp; Analysis</div><div class="adesc">UCEED-pattern tests with detailed performance feedback.</div></div>
+        <div class="acard"><div class="aicon">&#127919;</div><div class="atitle">Personal Mentoring</div><div class="adesc">Small batches for continuous, focused personal attention.</div></div>
+        <div class="acard dark"><div class="aicon">&#127942;</div><div class="atitle">Result-Oriented Prep</div><div class="adesc">From 11th to drop year &mdash; we meet students where they are.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tabbed">
+    <div class="r">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="showTab('u-elig',this)">Eligibility</button>
+        <button class="tab-btn" onclick="showTab('u-exam',this)">Exam Structure</button>
+        <button class="tab-btn" onclick="showTab('u-syl',this)">Syllabus</button>
+        <button class="tab-btn" onclick="showTab('u-camp',this)">Campuses &amp; Fees</button>
+      </div>
+
+      <div class="tab-pane active" id="u-elig">
+        <div class="elig-layout">
+          <div><span class="label">Who Can Apply</span><h2>Eligibility Criteria</h2><p>All three criteria must be fulfilled simultaneously. Students from <strong>all streams</strong> are eligible.</p></div>
+          <table class="elig-table">
+            <thead><tr><th>Criterion</th><th>Description</th></tr></thead>
+            <tbody>
+              <tr><td>Age Limit</td><td>Criteria to be checked in the appearing year's official brochure.</td></tr>
+              <tr><td>No. of Attempts</td><td>Maximum of <strong>two attempts</strong> in <strong>consecutive years</strong>. Score valid for <strong>one year</strong> only.</td></tr>
+              <tr><td>Qualifying Exam</td><td>Must have appeared for <strong>Class XII</strong> for the first time in <strong>2024 or 2025</strong>. All streams eligible.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="u-exam">
+        <div class="exam-cols">
+          <div class="ecard">
+            <div class="ecard-head"><div class="ecard-title">Part A &mdash; Computer Based</div><div class="ecard-badge">200 Marks</div></div>
+            <table class="struct-table">
+              <tr><td>Mode</td><td>Online (CBT)</td></tr>
+              <tr><td>Duration</td><td>2 Hours</td></tr>
+              <tr><td>Total Marks</td><td>200</td></tr>
+              <tr><td>Question Types</td><td>NAT, MSQ, MCQ</td></tr>
+            </table>
+          </div>
+          <div class="ecard">
+            <div class="ecard-head"><div class="ecard-title">Part B &mdash; Pen &amp; Paper</div><div class="ecard-badge">100 Marks</div></div>
+            <table class="struct-table">
+              <tr><td>Sketching</td><td>1 Question &mdash; 50 Marks</td></tr>
+              <tr><td>Design Aptitude</td><td>1 Question &mdash; 50 Marks</td></tr>
+              <tr><td>Total Questions</td><td>2</td></tr>
+              <tr><td>Total Marks</td><td>100</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="qtable-label">Part A &mdash; Question Format</div>
+        <div class="qwrap">
+          <table class="qtable">
+            <thead><tr><th>Sec</th><th>Type</th><th>Questions</th><th>Marks/Correct</th><th>Negative</th><th>Not Attempted</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>NAT</td><td>14</td><td>4</td><td>0</td><td>0</td><td>56</td></tr>
+              <tr><td>2</td><td>MSQ</td><td>15</td><td>Partial</td><td class="neg">&minus;1</td><td>0</td><td>60</td></tr>
+              <tr><td>3</td><td>MCQ</td><td>28</td><td>3</td><td class="neg">&minus;0.71</td><td>0</td><td>84</td></tr>
+              <tr><td><strong>Total</strong></td><td>&mdash;</td><td><strong>57</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>200</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="u-syl">
+        <div class="syl-grid">
+          <div class="syl-block">
+            <div class="syl-head"><div class="syl-title">Part A Syllabus</div><div class="syl-sub">CBT</div></div>
+            <div class="syl-row"><div class="syl-area">Visualization &amp; Spatial</div><div class="syl-desc">Visualize and transform 2D/3D shapes and relationships</div></div>
+            <div class="syl-row"><div class="syl-area">Scientific &amp; Practical</div><div class="syl-desc">Understanding of basic science and everyday objects</div></div>
+            <div class="syl-row"><div class="syl-area">Observation &amp; Sensitivity</div><div class="syl-desc">Attention to detail, hidden properties, critical thinking</div></div>
+            <div class="syl-row"><div class="syl-area">Environment &amp; Society</div><div class="syl-desc">Environmental, social, and cultural contexts in design</div></div>
+            <div class="syl-row"><div class="syl-area">Analytical &amp; Logical</div><div class="syl-desc">Interpret qualitative and quantitative information</div></div>
+            <div class="syl-row"><div class="syl-area">Language</div><div class="syl-desc">Proficiency in reading Standard English</div></div>
+            <div class="syl-row"><div class="syl-area">Creativity</div><div class="syl-desc">Use of analogies, metaphors, signs, and symbols</div></div>
+          </div>
+          <div class="syl-block">
+            <div class="syl-head"><div class="syl-title">Part B Syllabus</div><div class="syl-sub">Pen &amp; Paper</div></div>
+            <div class="syl-row"><div class="syl-area">Drawing</div><div class="syl-desc">Sketch products, people, or scenes &mdash; proportion, line quality, composition, shading</div></div>
+            <div class="syl-row"><div class="syl-area">Design Aptitude</div><div class="syl-desc">Respond to design problems with creativity, empathy, and contextual awareness</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="u-camp">
+        <div class="campus-grid">
+          <div class="ccard"><div class="cnum">01</div><div class="cname">IIT Bombay</div><div class="cdis">B.Des (Industrial Design)</div><div class="cseats">37 Seats</div><div class="cfeat">Premier design school; strong industry links; interdisciplinary exposure</div></div>
+          <div class="ccard"><div class="cnum">02</div><div class="cname">IIT Delhi</div><div class="cdis">B.Des (Design)</div><div class="cseats">20 Seats</div><div class="cfeat">Located in India's capital; design within engineering context</div></div>
+          <div class="ccard"><div class="cnum">03</div><div class="cname">IIT Guwahati</div><div class="cdis">B.Des (Design)</div><div class="cseats">56 Seats</div><div class="cfeat">Strong focus on design fundamentals and technology integration</div></div>
+        </div>
+        <div class="campus-bot">
+          <div class="ccard"><div class="cnum">04</div><div class="cname">IIT Hyderabad</div><div class="cdis">B.Des (Design)</div><div class="cseats">26 Seats</div><div class="cfeat">Emerging design hub; known for experimental and digital design</div></div>
+          <div class="ccard"><div class="cnum">05</div><div class="cname">IIITDM Jabalpur</div><div class="cdis">B.Des (Smart / Product Design)</div><div class="cseats">66 Seats</div><div class="cfeat">Design + engineering + manufacturing approach</div></div>
+        </div>
+        <div style="margin-top:1.8rem;">
+          <div class="qtable-label">B.Des Fee Structure (Approximate 1st Year)</div>
+          <div style="overflow-x:auto;">
+            <table class="fee-table">
+              <thead><tr><th>Institute</th><th>Tuition / Sem</th><th>Other Fees / Sem</th><th>One-time Fees</th><th>Total 1st Year</th></tr></thead>
+              <tbody>
+                <tr><td>IIT Bombay</td><td>&#8377;1,00,000</td><td>&#8377;22,350</td><td>&#8377;18,000</td><td class="fee-total">&#8377;2,36,000</td></tr>
+                <tr><td>IIT Delhi</td><td>&#8377;1,00,000</td><td>&#8377;6,250</td><td>&#8377;24,150</td><td class="fee-total">&#8377;2,22,800</td></tr>
+                <tr><td>IIT Guwahati</td><td>&#8377;1,00,000</td><td>&#8377;4,000+</td><td>&#8377;21,550</td><td class="fee-total">&#8377;2,15,550+</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /uceed -->
+
+
+<!-- ═══════════ CEED ═══════════ -->
+<div id="ceed">
+
+  <div class="exam-divider ceed-div">
+    <div class="r">
+      <div class="ediv-left">
+        <div class="ediv-tag">Postgraduate</div>
+        <div>
+          <div class="ediv-title"><span>CEED</span> &mdash; M.Des</div>
+          <div class="ediv-desc">Common Entrance Exam for Design.<br>Gateway to M.Des at IITs &amp; IISc Bangalore, conducted by IIT Bombay.</div>
+        </div>
+      </div>
+      <div class="ediv-stats">
+        <div class="ediv-stat"><div class="ediv-stat-n">7+</div><div class="ediv-stat-l">Institutes</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">250</div><div class="ediv-stat-l">Total Marks</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">2</div><div class="ediv-stat-l">Exam Parts</div></div>
+        <div class="ediv-stat"><div class="ediv-stat-n">IIT<br>Bombay</div><div class="ediv-stat-l">Conducted By</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-strip">
+    <div class="r">
+      <div class="info-col">
+        <span class="label">The Exam</span>
+        <h2>What is CEED?</h2>
+        <p>CEED is a national-level postgraduate design entrance exam conducted by <strong>IIT Bombay</strong> &mdash; the gateway to M.Des programs at IITs, IISc Bangalore, and IIITDM Jabalpur.</p>
+        <p>It assesses design creativity, reasoning, and problem-solving. CEED opens careers in industrial design, UX, animation, visual communication, and more.</p>
+        <div class="collapse-body" id="c-whatMore">
+          <p style="margin-top:.7rem;">No age limit and unlimited attempts make CEED accessible to working professionals and fresh graduates alike. Any stream graduate with a 3-year degree or diploma is eligible.</p>
+        </div>
+        <button class="read-more-btn" onclick="toggle('c-whatMore',this)">Read More <span class="arrow">&#9660;</span></button>
+        <div class="tag-row">
+          <span class="tag">IIT Bombay</span><span class="tag">IIT Delhi</span><span class="tag">IIT Guwahati</span>
+          <span class="tag">IIT Hyderabad</span><span class="tag">IIT Kanpur</span><span class="tag">IISc Bangalore</span><span class="tag">IIITDM Jabalpur</span>
+        </div>
+      </div>
+      <div class="info-col">
+        <span class="label">Why Choose Us</span>
+        <h2>Our Coaching Approach</h2>
+        <p>CEED demands higher design thinking, visual communication, and portfolio depth. Our training combines structured Part A aptitude work with intensive Part B studio practice.</p>
+        <p>We cover drawing, creative problem-solving, and design communication &mdash; tailored to the elevated expectations of M.Des admission panels.</p>
+        <div class="collapse-body" id="c-whyMore">
+          <p style="margin-top:.7rem;">Small batches, CEED-pattern mock tests, and portfolio development support ensure every student is thoroughly prepared and confident before the exam.</p>
+        </div>
+        <button class="read-more-btn" onclick="toggle('c-whyMore',this)">Read More <span class="arrow">&#9660;</span></button>
+      </div>
+    </div>
+  </div>
+
+  <section class="approach">
+    <div class="r">
+      <div class="approach-aside">
+        <span class="label">How We Train</span>
+        <h3>Preparation Approach</h3>
+        <p>Specialized CEED training for both CBT aptitude and the demanding Part B studio test.</p>
+      </div>
+      <div class="approach-grid">
+        <div class="acard"><div class="aicon">&#9999;&#65039;</div><div class="atitle">Freehand Drawing</div><div class="adesc">Products, people, scenes &mdash; proportion, perspective, shading for Part B.</div></div>
+        <div class="acard"><div class="aicon">&#128161;</div><div class="atitle">Visualization &amp; Aptitude</div><div class="adesc">2D/3D spatial reasoning, analytical thinking, design sensitivity for Part A.</div></div>
+        <div class="acard"><div class="aicon">&#129504;</div><div class="atitle">Creative Problem-Solving</div><div class="adesc">Divergent thinking, original ideas, and design innovation techniques.</div></div>
+        <div class="acard"><div class="aicon">&#128483;</div><div class="atitle">Visual Communication</div><div class="adesc">Clarity in expressing ideas through visuals and written content.</div></div>
+        <div class="acard"><div class="aicon">&#128221;</div><div class="atitle">Mock Tests &amp; Analysis</div><div class="adesc">Full CEED-pattern Part A + Part B mock tests with detailed feedback.</div></div>
+        <div class="acard dark"><div class="aicon">&#127912;</div><div class="atitle">Portfolio Guidance</div><div class="adesc">End-to-end support for building a strong M.Des portfolio and SOP.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tabbed">
+    <div class="r">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="showTab('c-elig',this)">Eligibility</button>
+        <button class="tab-btn" onclick="showTab('c-exam',this)">Exam Structure</button>
+        <button class="tab-btn" onclick="showTab('c-syl',this)">Syllabus</button>
+        <button class="tab-btn" onclick="showTab('c-camp',this)">Institutes &amp; Fees</button>
+      </div>
+
+      <div class="tab-pane active" id="c-elig">
+        <div class="elig-layout">
+          <div><span class="label">Who Can Apply</span><h2>Eligibility Criteria</h2><p>CEED is open to graduates from <strong>any stream</strong>. No age limit. No restriction on attempts.</p></div>
+          <table class="elig-table">
+            <thead><tr><th>Criterion</th><th>Details</th></tr></thead>
+            <tbody>
+              <tr><td>Educational Qualification</td><td>Completed a <strong>graduate/postgraduate degree</strong> or <strong>3-year diploma</strong> (minimum 3 years duration).</td></tr>
+              <tr><td>Age Limit</td><td><strong>No age limit</strong> to appear for CEED.</td></tr>
+              <tr><td>No. of Attempts</td><td>No restriction on number of attempts.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="c-exam">
+        <div class="exam-cols">
+          <div class="ecard">
+            <div class="ecard-head"><div class="ecard-title">Part A &mdash; Computer Based</div><div class="ecard-badge">150 Marks</div></div>
+            <table class="struct-table">
+              <tr><td>Mode</td><td>Online (CBT)</td></tr>
+              <tr><td>Duration</td><td>1 Hour</td></tr>
+              <tr><td>Total Marks</td><td>150</td></tr>
+              <tr><td>Question Types</td><td>NAT, MSQ, MCQ</td></tr>
+            </table>
+          </div>
+          <div class="ecard">
+            <div class="ecard-head"><div class="ecard-title">Part B &mdash; Written Test</div><div class="ecard-badge">100 Marks</div></div>
+            <table class="struct-table">
+              <tr><td>Mode</td><td>Written (Answer booklet)</td></tr>
+              <tr><td>Duration</td><td>2 Hours</td></tr>
+              <tr><td>Total Questions</td><td>5</td></tr>
+              <tr><td>Evaluation Areas</td><td>Design skills, sketching, problem-solving, creativity, communication</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="qtable-label">Part A &mdash; Question Format</div>
+        <div class="qwrap">
+          <table class="qtable">
+            <thead><tr><th>Type</th><th>Question Nos.</th><th>Questions</th><th>Marks/Correct</th><th>Negative</th><th>Not Attempted</th><th>Total</th></tr></thead>
+            <tbody>
+              <tr><td>NAT</td><td>1&ndash;8</td><td>8</td><td>4</td><td>0</td><td>0</td><td>32</td></tr>
+              <tr><td>MSQ</td><td>9&ndash;18</td><td>10</td><td>Partial</td><td class="neg">&minus;1</td><td>0</td><td>40</td></tr>
+              <tr><td>MCQ</td><td>19&ndash;44</td><td>26</td><td>3</td><td class="neg">&minus;0.5</td><td>0</td><td>78</td></tr>
+              <tr><td><strong>Total</strong></td><td>1&ndash;44</td><td><strong>44</strong></td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td><strong>150</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="c-syl">
+        <div class="syl-grid">
+          <div class="syl-block">
+            <div class="syl-head"><div class="syl-title">Part A Syllabus</div><div class="syl-sub">CBT</div></div>
+            <div class="syl-row"><div class="syl-area">Visualization &amp; Spatial</div><div class="syl-desc">Transform 2D/3D shapes, spatial relationships</div></div>
+            <div class="syl-row"><div class="syl-area">Scientific &amp; Practical</div><div class="syl-desc">Everyday scientific concepts and objects</div></div>
+            <div class="syl-row"><div class="syl-area">Observation &amp; Sensitivity</div><div class="syl-desc">Detect hidden patterns, critical analysis, detail awareness</div></div>
+            <div class="syl-row"><div class="syl-area">Environment &amp; Society</div><div class="syl-desc">Environmental, social, and cultural design connections</div></div>
+            <div class="syl-row"><div class="syl-area">Analytical &amp; Logical</div><div class="syl-desc">Data interpretation and logical thinking</div></div>
+            <div class="syl-row"><div class="syl-area">Language</div><div class="syl-desc">Proficiency in Standard English</div></div>
+            <div class="syl-row"><div class="syl-area">Creativity</div><div class="syl-desc">Analogies, metaphors, verbal and visual symbols</div></div>
+            <div class="syl-row"><div class="syl-area">Art &amp; Design History</div><div class="syl-desc">Art history, artists, products, and current design trends</div></div>
+            <div class="syl-row"><div class="syl-area">Design Methods</div><div class="syl-desc">Materials, media, production methods, and ergonomics</div></div>
+          </div>
+          <div class="syl-block">
+            <div class="syl-head"><div class="syl-title">Part B Syllabus</div><div class="syl-sub">Written</div></div>
+            <div class="syl-row"><div class="syl-area">Drawing</div><div class="syl-desc">Freehand drawing &mdash; scenes, products, people with proportion, perspective, shading</div></div>
+            <div class="syl-row"><div class="syl-area">Creativity</div><div class="syl-desc">Divergent thinking, original ideas and design solutions</div></div>
+            <div class="syl-row"><div class="syl-area">Communication</div><div class="syl-desc">Express ideas clearly through visuals and written content</div></div>
+            <div class="syl-row"><div class="syl-area">Problem Identification</div><div class="syl-desc">User needs, appropriate materials, and design context</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="c-camp">
+        <div class="qtable-label" style="margin-bottom:1rem;">M.Des Seat Matrix (Approx.)</div>
+        <div style="overflow-x:auto;margin-bottom:2rem;">
+          <table class="seat-table">
+            <thead><tr><th>Institute</th><th>Department / Discipline</th><th style="text-align:center;">Seats</th></tr></thead>
+            <tbody>
+              <tr class="seat-group"><td rowspan="5">IIT Bombay</td><td>Industrial Design</td><td>21</td></tr>
+              <tr><td>Visual Communication</td><td>15</td></tr>
+              <tr><td>Animation Design</td><td>15</td></tr>
+              <tr><td>Interaction Design</td><td>15</td></tr>
+              <tr><td>Mobility &amp; Vehicle Design</td><td>15</td></tr>
+              <tr class="seat-group"><td>IIT Delhi</td><td>Industrial Design</td><td>20</td></tr>
+              <tr class="seat-group"><td rowspan="4">IIT Guwahati</td><td>Communication Design</td><td>12</td></tr>
+              <tr><td>Industrial Design</td><td>12</td></tr>
+              <tr><td>Interaction Design</td><td>12</td></tr>
+              <tr><td>Medical Science &amp; Technology</td><td>10</td></tr>
+              <tr class="seat-group"><td rowspan="4">IIT Hyderabad</td><td>Product Design</td><td>10</td></tr>
+              <tr><td>Visual Design</td><td>10</td></tr>
+              <tr><td>UX Design</td><td>10</td></tr>
+              <tr><td>Animation &amp; VFX</td><td>10</td></tr>
+              <tr class="seat-group"><td>IIT Kanpur</td><td>Design</td><td>15</td></tr>
+              <tr class="seat-group"><td>IISc Bangalore</td><td>Product Design &amp; Engineering</td><td>20</td></tr>
+              <tr class="seat-group"><td>IIITDM Jabalpur</td><td>Design (Mechanical / Electronics / Communication)</td><td>30</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="qtable-label">M.Des Fee Structure (Per Semester &middot; 4 Semesters / 2 Years)</div>
+        <div style="overflow-x:auto;">
+          <table class="fee-table">
+            <thead><tr><th>Institute</th><th>Tuition Fee</th><th>Other Charges</th><th>Hostel &amp; Mess</th><th>Total / Sem (Approx.)</th></tr></thead>
+            <tbody>
+              <tr><td>IIT Bombay</td><td>&#8377;25,000</td><td>&#8377;24,000</td><td>&#8377;22,000</td><td class="fee-total">&#8377;71,000</td></tr>
+              <tr><td>IIT Delhi</td><td>&#8377;25,000</td><td>&#8377;15,000</td><td>&#8377;22,000</td><td class="fee-total">&#8377;62,000</td></tr>
+              <tr><td>IIT Guwahati</td><td>&#8377;25,000</td><td>&#8377;20,000</td><td>&#8377;23,000</td><td class="fee-total">&#8377;68,000</td></tr>
+              <tr><td>IIT Hyderabad</td><td>&#8377;25,000</td><td>&#8377;17,000</td><td>&#8377;25,000</td><td class="fee-total">&#8377;67,000</td></tr>
+              <tr><td>IIT Kanpur</td><td>&#8377;25,000</td><td>&#8377;22,000</td><td>&#8377;20,000</td><td class="fee-total">&#8377;67,000</td></tr>
+              <tr><td>IISc Bangalore</td><td>&#8377;16,000</td><td>&#8377;10,000</td><td>&#8377;20,000</td><td class="fee-total">&#8377;46,000</td></tr>
+              <tr><td>IIITDM Jabalpur</td><td>&#8377;25,000</td><td>&#8377;10,000</td><td>&#8377;18,000</td><td class="fee-total">&#8377;53,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /ceed -->
+
+
+<!-- SHARED CTA -->
+<div class="cta-band">
+  <div class="r">
+    <div>
+      <h2>READY TO CRACK <span>YOUR EXAM?</span></h2>
+      <p>Book a Free Demo Class today &mdash; structured, result-oriented preparation with expert mentors for both UCEED and CEED.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn-accent" href="#">&#128222; Book a Free Demo Class</a>
+      <a class="btn-outline-w" href="#">Free Counselling &rarr;</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showTab(id, btn) {
+    const section = btn.closest('.tabbed');
+    section.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    section.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+  function toggle(id, btn) {
+    const el = document.getElementById(id);
+    const isOpen = el.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    btn.childNodes[0].textContent = isOpen ? 'Read Less ' : 'Read More ';
+  }
+  const sections = [document.getElementById('uceed'), document.getElementById('ceed')];
+  const navLinks = document.querySelectorAll('.pnav-link');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(l => {
+      l.classList.remove('active');
+      if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
