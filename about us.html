@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us | My Design Academia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{--bg:#fff;--bg2:#f7f7f7;--bg3:#eee;--border:rgba(0,0,0,.08);--text:#000;--muted:rgba(0,0,0,.55);--mid:rgba(0,0,0,.75);--accent:#d4ff00;}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;font-weight:300;overflow-x:hidden;}
+    a{text-decoration:none;color:inherit;}
+    .label{font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+    .r{max-width:1200px;margin:0 auto;padding:0 3rem;}
+
+    /* ── HERO ── */
+    .hero{background:#000;color:#fff;padding:4rem 0 3.5rem;border-bottom:3px solid var(--accent);}
+    .hero .r{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:end;}
+    .hero-badge{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);border:1px solid var(--accent);padding:.3rem .85rem;margin-bottom:1.2rem;}
+    .hero h1{font-family:"Bebas Neue",sans-serif;font-size:clamp(3rem,6vw,5rem);line-height:1;letter-spacing:.02em;margin-bottom:1rem;}
+    .hero h1 span{color:var(--accent);}
+    .hero-desc{font-size:.88rem;color:rgba(255,255,255,.6);line-height:1.85;max-width:440px;}
+    .hero-right{display:flex;flex-direction:column;gap:1px;background:rgba(255,255,255,.08);align-self:stretch;justify-content:center;}
+    .hero-stat{background:#111;padding:1.4rem 2rem;}
+    .hero-stat-n{font-family:"Bebas Neue",sans-serif;font-size:2.4rem;color:var(--accent);line-height:1;}
+    .hero-stat-l{font-size:.62rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:.2rem;}
+
+    /* ── VISION STRIP ── */
+    .vision{border-bottom:1px solid var(--border);}
+    .vision .r{display:grid;grid-template-columns:1fr 1fr;}
+    .vision-col{padding:3rem;}
+    .vision-col:first-child{border-right:1px solid var(--border);}
+    .vision-col .label{display:block;margin-bottom:.6rem;}
+    .vision-col h2{font-family:"Bebas Neue",sans-serif;font-size:1.8rem;letter-spacing:.04em;margin-bottom:1rem;}
+    .vision-col p{font-size:.85rem;color:var(--muted);line-height:1.85;margin-bottom:.8rem;}
+    .vision-col p:last-child{margin-bottom:0;}
+
+    /* ── FACULTY BAND ── */
+    .faculty{background:#000;color:#fff;padding:3.5rem 0;border-bottom:3px solid rgba(255,255,255,.06);}
+    .faculty .r{display:grid;grid-template-columns:300px 1fr;gap:4rem;align-items:start;}
+    .faculty-left .label{color:rgba(255,255,255,.4);display:block;margin-bottom:.6rem;}
+    .faculty-left h2{font-family:"Bebas Neue",sans-serif;font-size:2.2rem;letter-spacing:.03em;line-height:1.05;margin-bottom:1rem;color:#fff;}
+    .faculty-left h2 span{color:var(--accent);}
+    .faculty-left p{font-size:.84rem;color:rgba(255,255,255,.55);line-height:1.85;}
+    .faculty-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);}
+    .fcard{background:#111;padding:1.8rem 1.6rem;}
+    .fcard-icon{font-size:1.6rem;margin-bottom:.8rem;}
+    .fcard-title{font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:#fff;margin-bottom:.5rem;}
+    .fcard-desc{font-size:.8rem;color:rgba(255,255,255,.5);line-height:1.75;}
+    .fcard-tag{display:inline-block;background:var(--accent);color:#000;font-size:.58rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.2rem .6rem;margin-top:.8rem;}
+
+    /* ── CURRICULUM ── */
+    .curriculum{padding:3.5rem 0;border-bottom:1px solid var(--border);}
+    .curriculum .r{display:grid;grid-template-columns:260px 1fr;gap:4rem;align-items:start;}
+    .curriculum-aside .label{display:block;margin-bottom:.5rem;}
+    .curriculum-aside h2{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:.04em;line-height:1.05;margin-bottom:.8rem;}
+    .curriculum-aside p{font-size:.83rem;color:var(--muted);line-height:1.8;}
+    .curr-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .curr-item{background:var(--bg);display:grid;grid-template-columns:56px 1fr;gap:0;}
+    .curr-num{background:#000;color:var(--accent);font-family:"Bebas Neue",sans-serif;font-size:1.6rem;display:flex;align-items:center;justify-content:center;padding:.5rem;}
+    .curr-body{padding:1.4rem 1.6rem;}
+    .curr-title{font-weight:600;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.4rem;}
+    .curr-desc{font-size:.82rem;color:var(--muted);line-height:1.75;}
+
+    /* ── COMMUNITY ── */
+    .community{background:var(--bg2);border-bottom:1px solid var(--border);padding:3.5rem 0;}
+    .community .r{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
+    .community-left .label{display:block;margin-bottom:.6rem;}
+    .community-left h2{font-family:"Bebas Neue",sans-serif;font-size:2rem;letter-spacing:.04em;margin-bottom:1rem;}
+    .community-left p{font-size:.85rem;color:var(--muted);line-height:1.85;margin-bottom:.8rem;}
+    .community-right{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+    .comm-stat{background:var(--bg);padding:1.6rem;text-align:center;}
+    .comm-stat-n{font-family:"Bebas Neue",sans-serif;font-size:2.2rem;color:#000;line-height:1;margin-bottom:.3rem;}
+    .comm-stat-l{font-size:.63rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+    .btn-black{display:inline-block;background:#000;color:#fff;font-family:"Inter",sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.85rem 1.8rem;transition:all .2s;margin-top:1.2rem;}
+    .btn-black:hover{background:#222;}
+    .btn-outline{display:inline-block;border:1px solid rgba(0,0,0,.35);color:#000;font-family:"Inter",sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.85rem 1.8rem;transition:all .2s;margin-left:.75rem;}
+    .btn-outline:hover{background:#000;color:#fff;}
+
+    /* ── MARQUEE ── */
+    .marquee-wrap{overflow:hidden;background:#000;padding:.85rem 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+    .marquee-track{display:flex;width:max-content;animation:marquee 28s linear infinite;}
+    @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .marquee-item{font-family:"Bebas Neue",sans-serif;font-size:1rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);padding:0 2rem;white-space:nowrap;}
+    .marquee-item span{color:var(--accent);margin-left:2rem;}
+
+    /* ── CTA ── */
+    .cta{background:#000;color:#fff;padding:3.5rem 0;}
+    .cta .r{display:flex;align-items:center;justify-content:space-between;gap:2rem;}
+    .cta h2{font-family:"Bebas Neue",sans-serif;font-size:2.2rem;letter-spacing:.04em;margin-bottom:.5rem;}
+    .cta h2 span{color:var(--accent);}
+    .cta p{font-size:.85rem;color:rgba(255,255,255,.55);line-height:1.8;max-width:420px;}
+    .cta-btns{display:flex;flex-direction:column;gap:.6rem;flex-shrink:0;}
+    .btn-accent{display:inline-block;background:var(--accent);color:#000;font-family:"Inter",sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.85rem 1.8rem;transition:all .2s;text-align:center;}
+    .btn-accent:hover{background:#c8f000;}
+    .btn-outline-w{display:inline-block;border:1px solid rgba(255,255,255,.25);color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;padding:.85rem 1.8rem;transition:all .2s;text-align:center;}
+    .btn-outline-w:hover{background:rgba(255,255,255,.08);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:960px){
+      .r{padding:0 1.5rem;}
+      .hero .r,.vision .r,.community .r{grid-template-columns:1fr;}
+      .vision-col:first-child{border-right:none;border-bottom:1px solid var(--border);}
+      .faculty .r,.curriculum .r{grid-template-columns:1fr;}
+      .hero-right{flex-direction:row;flex-wrap:wrap;}
+      .hero-stat{flex:1;min-width:140px;}
+      .cta .r{flex-direction:column;align-items:flex-start;}
+      .cta-btns{flex-direction:row;flex-wrap:wrap;}
+    }
+    @media(max-width:600px){
+      .faculty-grid,.community-right{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="r">
+    <div>
+      <div class="hero-badge">About Us</div>
+      <h1>MY DESIGN<br><span>ACADEMIA</span></h1>
+      <p class="hero-desc">A constant support system for aspiring designers &mdash; providing the training, resources, and mentorship needed to thrive in India's most competitive design and architecture programs.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat"><div class="hero-stat-n">5+</div><div class="hero-stat-l">Exams Covered</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">NID</div><div class="hero-stat-l">Alumni Faculty</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">IIT</div><div class="hero-stat-l">Alumni Faculty</div></div>
+      <div class="hero-stat"><div class="hero-stat-n">100%</div><div class="hero-stat-l">Creative Focus</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISION + MISSION ── -->
+<div class="vision">
+  <div class="r">
+    <div class="vision-col">
+      <span class="label">Our Vision</span>
+      <h2>WHY WE EXIST</h2>
+      <p>At My Design Academia, our vision is to serve as a constant support system for aspiring designers, providing the training, resources, and mentorship they need to thrive in this competitive field.</p>
+      <p>We take pride in our team of passionate and dedicated educators &mdash; alumni from NID, IIT, NIFT and top Architecture institutes &mdash; brought together by a shared mission to guide and empower the next generation of designers.</p>
+    </div>
+    <div class="vision-col">
+      <span class="label">Visiting Faculty</span>
+      <h2>DECADES OF EXPERIENCE</h2>
+      <p>We also invite visiting faculty with decades of experience, many of whom have served as professors and jurors at leading design institutions.</p>
+      <p>Their combined academic and industry insights offer students a well-rounded, real-world perspective on design &mdash; the kind that no textbook alone can provide.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── FACULTY ── -->
+<section class="faculty">
+  <div class="r">
+    <div class="faculty-left">
+      <span class="label">Our Educators</span>
+      <h2>FACULTY FROM<br><span>INDIA'S BEST</span></h2>
+      <p>Our educators are alumni of the very institutions you are aiming for &mdash; with active industry careers and deep exam expertise to match.</p>
+    </div>
+    <div class="faculty-grid">
+      <div class="fcard">
+        <div class="fcard-icon">&#127981;</div>
+        <div class="fcard-title">NID Alumni</div>
+        <div class="fcard-desc">Faculty from National Institute of Design &mdash; India's premier design school and an Institute of National Importance.</div>
+        <div class="fcard-tag">Design Leadership</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">&#127979;</div>
+        <div class="fcard-title">IIT Alumni</div>
+        <div class="fcard-desc">Educators from IITs who understand UCEED and CEED inside-out from personal experience and continued teaching.</div>
+        <div class="fcard-tag">Engineering + Design</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">&#9999;&#65039;</div>
+        <div class="fcard-title">NIFT Alumni</div>
+        <div class="fcard-desc">Fashion and textile design faculty from India's top fashion institute with deep knowledge of creative disciplines.</div>
+        <div class="fcard-tag">Fashion &amp; Textile</div>
+      </div>
+      <div class="fcard">
+        <div class="fcard-icon">&#127963;</div>
+        <div class="fcard-title">Architecture Alumni</div>
+        <div class="fcard-desc">Practitioners and educators from India's leading architecture colleges &mdash; guiding NATA, JEE Paper 2 preparation.</div>
+        <div class="fcard-tag">Architecture &amp; Planning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">NID DAT<span>&#10022;</span></span>
+    <span class="marquee-item">UCEED<span>&#10022;</span></span>
+    <span class="marquee-item">CEED<span>&#10022;</span></span>
+    <span class="marquee-item">NIFT<span>&#10022;</span></span>
+    <span class="marquee-item">NATA<span>&#10022;</span></span>
+    <span class="marquee-item">JEE PAPER 2<span>&#10022;</span></span>
+    <span class="marquee-item">PORTFOLIO PREP<span>&#10022;</span></span>
+    <span class="marquee-item">DESIGN COACHING<span>&#10022;</span></span>
+    <span class="marquee-item">NID DAT<span>&#10022;</span></span>
+    <span class="marquee-item">UCEED<span>&#10022;</span></span>
+    <span class="marquee-item">CEED<span>&#10022;</span></span>
+    <span class="marquee-item">NIFT<span>&#10022;</span></span>
+    <span class="marquee-item">NATA<span>&#10022;</span></span>
+    <span class="marquee-item">JEE PAPER 2<span>&#10022;</span></span>
+    <span class="marquee-item">PORTFOLIO PREP<span>&#10022;</span></span>
+    <span class="marquee-item">DESIGN COACHING<span>&#10022;</span></span>
+  </div>
+</div>
+
+<!-- ── CURRICULUM ── -->
+<section class="curriculum">
+  <div class="r">
+    <div class="curriculum-aside">
+      <span class="label">What We Teach</span>
+      <h2>OUR CURRICULUM</h2>
+      <p>Thoughtfully designed to build the full spectrum of skills needed for design and architecture entrance exams &mdash; and the careers beyond them.</p>
+    </div>
+    <div class="curr-list">
+      <div class="curr-item">
+        <div class="curr-num">01</div>
+        <div class="curr-body">
+          <div class="curr-title">Foundation in Design &amp; Sketching</div>
+          <div class="curr-desc">Build a strong foundation in design principles and sketching skills essential for a successful journey in design and architecture.</div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-num">02</div>
+        <div class="curr-body">
+          <div class="curr-title">Creative Thinking &amp; Visual Communication</div>
+          <div class="curr-desc">Foster creative thinking, visual communication, and problem-solving abilities through hands-on learning and guided practice.</div>
+        </div>
+      </div>
+      <div class="curr-item">
+        <div class="curr-num">03</div>
+        <div class="curr-body">
+          <div class="curr-title">Entrance Exam Strategy</div>
+          <div class="curr-desc">Equip students with integrated coaching in mathematics and aptitude, along with strategic tools to excel in design and architecture entrance exams.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMMUNITY ── -->
+<section class="community">
+  <div class="r">
+    <div class="community-left">
+      <span class="label">My Design Community</span>
+      <h2>JOIN A NETWORK THAT OPENS DOORS</h2>
+      <p>Join the My Design Community for free &mdash; where students gain access to a vast network of accomplished design alumni who are eager to share their expertise and open doors to new opportunities.</p>
+      <p>Our community includes practicing designers, architects, and industry leaders &mdash; recognized experts and top rankers of their time &mdash; who are committed to giving back to the design fraternity.</p>
+      <a class="btn-black" href="#">Join Our Free Community &rarr;</a>
+      <a class="btn-outline" href="#">Book Free Counselling</a>
+    </div>
+    <div class="community-right">
+      <div class="comm-stat"><div class="comm-stat-n">Free</div><div class="comm-stat-l">Community Access</div></div>
+      <div class="comm-stat"><div class="comm-stat-n">Alumni</div><div class="comm-stat-l">Network</div></div>
+      <div class="comm-stat"><div class="comm-stat-n">NID</div><div class="comm-stat-l">Top Rankers</div></div>
+      <div class="comm-stat"><div class="comm-stat-n">IIT</div><div class="comm-stat-l">Design Alumni</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta">
+  <div class="r">
+    <div>
+      <h2>LET'S DESIGN<br><span>YOUR FUTURE</span></h2>
+      <p>At My Design Academia, we aim to ignite your creative potential and ensure you are well-prepared for a bright and fulfilling career in design and architecture. Embark on this exciting journey with us.</p>
+    </div>
+    <div class="cta-btns">
+      <a class="btn-accent" href="#">&#128222; Book a Free Demo Class</a>
+      <a class="btn-outline-w" href="#">Explore Our Courses &rarr;</a>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
